@@ -1,0 +1,121 @@
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+
+public class ArrayStatistics {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Read input from the user
+        System.out.print("Enter the size of the array: ");
+        int size = scanner.nextInt();
+
+        int[] numbers = new int[size];
+        System.out.println("Enter the elements of the array:");
+
+        for (int i = 0; i < size; i++) {
+            numbers[i] = scanner.nextInt();
+        }
+        scanner.close();
+
+        // Calculate and print mean, median, and mode
+        calculateAndPrintStatistics(numbers);
+    }
+
+    static void calculateAndPrintStatistics(int[] numbers) {
+        // Sort the array
+        Arrays.sort(numbers);
+
+        // Calculate mean
+        double mean = calculateMean(numbers);
+
+        // Calculate median
+        double median = calculateMedian(numbers);
+
+        // Calculate mode
+        int[] mode = calculateMode(numbers);
+
+        // Print the results
+        System.out.println("Mean: " + mean);
+        System.out.println("Median: " + median);
+
+        if (mode != null) {
+            System.out.print("Mode: ");
+            for (int value : mode) {
+                System.out.print(value + " ");
+            }
+            System.out.println();
+        } else {
+            System.out.println("No mode. All values occur only once.");
+        }
+    }
+
+    static double calculateMean(int[] numbers) {
+        double sum = 0;
+
+        for (int number : numbers) {
+            sum += number;
+        }
+
+        return sum / numbers.length;
+    }
+
+    static double calculateMedian(int[] numbers) {
+        int length = numbers.length;
+        int middle = length / 2;
+
+        if (length % 2 == 0) {
+            return (double) (numbers[middle - 1] + numbers[middle]) / 2;
+        } else {
+            return numbers[middle];
+        }
+    }
+
+    static int[] calculateMode(int[] numbers) {
+        Map<Integer, Integer> frequencyMap = new HashMap<>();
+
+        for (int number : numbers) {
+            frequencyMap.put(number, frequencyMap.getOrDefault(number, 0) + 1);
+        }
+
+        int maxFrequency = 0;
+
+        for (int frequency : frequencyMap.values()) {
+            if (frequency > maxFrequency) {
+                maxFrequency = frequency;
+            }
+        }
+
+        if (maxFrequency == 1) {
+            // All values occur only once, no mode
+            return null;
+        }
+
+        // Find values with the maximum frequency (mode)
+        int modeCount = 0;
+
+        for (int key : frequencyMap.keySet()) {
+            if (frequencyMap.get(key) == maxFrequency) {
+                modeCount++;
+            }
+        }
+
+        int[] modeValues = new int[modeCount];
+        int index = 0;
+
+        for (int key : frequencyMap.keySet()) {
+            if (frequencyMap.get(key) == maxFrequency) {
+                modeValues[index++] = key;
+            }
+        }
+
+        return modeValues;
+    }
+}
+OUTPUT :
+Enter the size of the array: 7
+Enter the elements of the array:
+16 18 27 16 23 21 19
+Mean: 20.0Median: 19.0
+Mode: 16
