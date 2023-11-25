@@ -1,0 +1,47 @@
+import java.util.Scanner;
+
+public class CompositeNumberPrinter {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Read input from the user
+        System.out.print("Enter the value of A: ");
+        int A = scanner.nextInt();
+
+        System.out.print("Enter the value of B: ");
+        int B = scanner.nextInt();
+        scanner.close();
+
+        // Print composite numbers between A and B
+        System.out.println("Composite numbers between " + A + " and " + B + ":");
+        printCompositeNumbers(A, B);
+    }
+
+    static void printCompositeNumbers(int A, int B) {
+        for (int i = A; i <= B; i++) {
+            if (isComposite(i)) {
+                System.out.print(i + " ");
+            }
+        }
+        System.out.println();
+    }
+
+    static boolean isComposite(int number) {
+        if (number <= 1) {
+            return false;
+        }
+
+        for (int i = 2; i <= Math.sqrt(number); i++) {
+            if (number % i == 0) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+}
+OUTPUT :
+Enter the value of A: 12
+Enter the value of B: 19
+Composite numbers between 12 and 19:
+12 14 15 16 18
