@@ -1,0 +1,54 @@
+import java.util.Scanner;
+
+public class UsernameValidator {
+    public static void main(String[] args) {
+        // Read input from the user
+        Scanner scanner = new Scanner(System.in);
+
+        // Get and validate the first username
+        System.out.print("Enter the user name: ");
+        String username1 = scanner.nextLine();
+        while (!isValidUsername(username1)) {
+            System.out.println("Invalid username. Please check the criteria.");
+            System.out.print("Reenter the user name: ");
+            username1 = scanner.nextLine();
+        }
+
+        // Get and validate the second username
+        System.out.print("Reenter the user name: ");
+        String username2 = scanner.nextLine();
+        while (!isValidUsername(username2) || !username1.equals(username2)) {
+            if (!isValidUsername(username2)) {
+                System.out.println("Invalid username. Please check the criteria.");
+            } else {
+                System.out.println("Usernames do not match.");
+            }
+            System.out.print("Reenter the user name: ");
+            username2 = scanner.nextLine();
+        }
+
+        // Usernames are valid and match
+        System.out.println("Usernames are valid and match!");
+
+        scanner.close();
+    }
+
+    static boolean isValidUsername(String username) {
+        // Check length
+        if (username.length() < 8) {
+            return false;
+        }
+
+        // Check if the username contains at least one uppercase letter, one lowercase letter, one digit, and one special character
+        if (!username.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]+$")) {
+            return false;
+        }
+
+        // If all criteria are met, the username is considered valid
+        return true;
+    }
+}
+output :
+Enter the user name: Saveetha@789
+Reenter the user name: Saveetha@123
+Usernames do not match.
