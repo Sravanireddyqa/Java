@@ -1,0 +1,41 @@
+import java.util.Scanner;
+
+public class NumberSkipping {
+    public static void main(String[] args) {
+        // Read input from the user
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the starting number (M): ");
+        int m = scanner.nextInt();
+
+        System.out.print("Enter the ending number (N): ");
+        int n = scanner.nextInt();
+
+        System.out.print("Enter the number of steps to skip (K): ");
+        int k = scanner.nextInt();
+        scanner.close();
+
+        // Print numbers from M to N, skipping K numbers in between
+        printNumbersWithSkipping(m, n, k);
+    }
+
+    static void printNumbersWithSkipping(int start, int end, int skip) {
+        if (start > end) {
+            System.out.println("Invalid input: Starting number (M) should be less than or equal to the ending number (N).");
+            return;
+        }
+
+        System.out.println("Numbers from " + start + " to " + end + " skipping " + skip + " numbers:");
+
+        for (int i = start; i <= end; i += skip + 1) {
+            System.out.print(i + " ");
+        }
+
+        System.out.println();
+    }
+}
+OUTPUT :
+Enter the starting number (M): 50
+Enter the ending number (N): 100
+Enter the number of steps to skip (K): 7
+Numbers from 50 to 100 skipping 7 numbers:
+50 58 66 74 82 90 98
