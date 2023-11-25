@@ -1,0 +1,37 @@
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Scanner;
+
+public class NameSorter {
+    public static void main(String[] args) {
+        // Read input from the user
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the names separated by commas: ");
+        String input = scanner.nextLine();
+
+        // Split the input into an array of names
+        String[] namesArray = input.split(",\\s*");
+        List<String> namesList = Arrays.asList(namesArray);
+
+        // Get the sorting choice from the user
+        System.out.print("Enter the sorting order (Ascending/Descending): ");
+        String sortingOrder = scanner.next();
+        scanner.close();
+
+        // Sort and print the names based on the user's choice
+        if (sortingOrder.equalsIgnoreCase("Ascending")) {
+            Collections.sort(namesList);
+            System.out.println("Names in Ascending Order: " + namesList);
+        } else if (sortingOrder.equalsIgnoreCase("Descending")) {
+            Collections.sort(namesList, Collections.reverseOrder());
+            System.out.println("Names in Descending Order: " + namesList);
+        } else {
+            System.out.println("Invalid sorting order. Please enter 'Ascending' or 'Descending'.");
+        }
+    }
+}
+OUTPUT :
+Enter the names separated by commas: Banana Carrot Radish Apple Jack
+Enter the sorting order (Ascending/Descending): Ascending
+Names in Ascending Order: [Banana Carrot Radish Apple Jack]
